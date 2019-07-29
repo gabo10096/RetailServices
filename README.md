@@ -1,5 +1,12 @@
 # Proyecto Micro Servicios
 
+## Requerimientos
+
+- [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Maven](https://maven.apache.org/download.cgi)
+- [Docker](https://www.docker.com/get-started)
+- [Liquibase 3.5.5](https://download.liquibase.org/download/?frm=n)
+
 ## Compilación
 
 ```bash
@@ -17,12 +24,24 @@ cd user-service/
 mvn clean package
 
 ```
+
 ## Levantar DB
 User: postgres
 
 ```bash
 
 docker run --name postgresdb -p 5432:5432 -e POSTGRES_DB=unbound -e POSTGRES_PASSWORD=postgres123 -d postgres
+
+```
+
+## Configurar liquibase
+
+Despues de descargar liquibase-3.5.5-bin.tar.gz, descomprimirlo y ejecutar lo siguiente:
+
+```bash
+
+sudo mv liquibase-3.5.5-bin/ /opt/liquibase-3.5.5-bin
+export PATH=/opt/liquibase-3.5.5-bin:$PATH
 
 ```
 
