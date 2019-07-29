@@ -1,4 +1,4 @@
-# Proyecto Micro Servicios
+# Proyecto MicroServicios
 
 ## Requerimientos
 
@@ -74,11 +74,23 @@ java -jar user-web/target/*.jar
 ## Probar 
 
 ### Desde Api Manager
-http://localhost:8000/api/orders/order/test
-http://localhost:8000/api/products/product/test
-http://localhost:8000/api/users/user/test
+  
+```http
 
-### Directo a los servicios
-http://localhost:8200/order/test
-http://localhost:8300/product/test
-http://localhost:8100/user/test
+GET http://localhost:8000/api/orders/order/test
+GET http://localhost:8000/api/products/product/test
+GET http://localhost:8000/api/users/user/test
+
+```
+
+###Directo a los servicios
+
+```http
+
+GET http://localhost:8200/order/test
+GET http://localhost:8300/product/test
+GET http://localhost:8100/user/test
+
+```
+
+[Postman Collection](https://www.getpostman.com/collections/0e7c92036c7de539b9c3)
