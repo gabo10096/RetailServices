@@ -94,3 +94,79 @@ GET http://localhost:8100/user/test
 ```
 
 [Postman Collection](https://www.getpostman.com/collections/0e7c92036c7de539b9c3)
+
+
+## Generar los contenedores
+
+# Dockerfile-apimanager
+
+```bash 
+
+docker build -t api_manager -f Dockerfile-apimanager .
+docker run -d -p 8000:8000 api_manager
+
+```
+
+# Dockerfile-orderservice
+
+```bash 
+
+docker build -t order_service -f Dockerfile-orderservice .
+docker run -d -p 8200:8200 order_service
+
+```
+
+# Dockerfile-productservice
+
+```bash 
+
+docker build -t product_service -f Dockerfile-productservice .
+docker run -d -p 8300:8300 product_service
+
+```
+
+# Dockerfile-userservice
+
+```bash 
+
+docker build -t user_service -f Dockerfile-userservice .
+docker run -d -p 8100:8100 user_service
+
+```
+
+## Generar docker-compose
+
+```bash 
+
+docker-compose up -d
+docker-compose down --rmi all      
+
+```
+
+## Red de contenedores 
+
+```bash 
+
+docker network ls 
+docker inspect [NETWORK_ID]
+
+```
+
+## Agregar contenedor a red
+
+```bash 
+
+docker network connect [NETWORK_ID] [CONTAINER_ID]
+
+```
+
+## Quitar contenedor de red
+
+```bash 
+
+docker network disconnect [NETWORK_ID] [CONTAINER_ID]
+
+```
+
+
+
