@@ -121,6 +121,11 @@
                 <version>${jaxb.version}</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-awt</artifactId>
+                <version>s</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

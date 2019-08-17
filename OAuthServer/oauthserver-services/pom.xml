@@ -51,6 +51,10 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-awt</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -3,7 +3,7 @@ package mx.com.example.services.service.impl;
 import mx.com.example.commons.to.UserTO;
 import mx.com.example.model.UserDO;
 import mx.com.example.persistence.UserDAO;
-import mx.com.example.services.service.IOauthserverService;
+import mx.com.example.services.service.ITokenService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
-public class OauthserverServiceImpl implements IOauthserverService {
+public class TokenServiceImpl implements ITokenService {
 
     static final Logger LOG = LogManager.getLogger(OauthserverServiceImpl.class);
 
