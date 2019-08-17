@@ -1,8 +1,11 @@
 package mx.com.example.services.service.impl;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import mx.com.example.commons.constants.ErrorMessages;
 import mx.com.example.commons.exceptions.UnAuthorizedException;
 import mx.com.example.commons.to.UserTO;
@@ -17,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.lang.reflect.Type;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +44,7 @@ public class TokenServiceImpl implements ITokenService {
                     .withClaim("clientId", clientId)
                     .withClaim("user", user)
                     .withClaim("profile", profile)
+                    .withExpiresAt(Date.from(Instant.now().plusSeconds(ttl)))
                     .sign(algorithm);
         } catch (JWTCreationException exception){
             throw new UnAuthorizedException(ErrorMessages.CANNOT_CREATE_TOKEN, exception);
@@ -49,6 +55,14 @@ public class TokenServiceImpl implements ITokenService {
     @Override
     public void validateToken(String token) {
 
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretWord);
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .build();
+            verifier.verify(token);
+        } catch (JWTVerificationException exception){
+            throw new UnAuthorizedException(ErrorMessages.INVALID_TOKEN, exception);
+        }
     }
 
     @Override
