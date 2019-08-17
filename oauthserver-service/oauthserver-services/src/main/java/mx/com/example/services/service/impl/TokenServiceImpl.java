@@ -8,21 +8,16 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import mx.com.example.commons.constants.ErrorMessages;
 import mx.com.example.commons.exceptions.UnAuthorizedException;
-import mx.com.example.commons.to.UserTO;
-import mx.com.example.model.UserDO;
-import mx.com.example.persistence.UserDAO;
 import mx.com.example.services.service.ITokenService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import java.lang.reflect.Type;
+
 import java.time.Instant;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class TokenServiceImpl implements ITokenService {
@@ -66,7 +61,21 @@ public class TokenServiceImpl implements ITokenService {
     }
 
     @Override
-    public void getPayload(String token) {
+    public Map<String, String> getPayload(String token) {
 
+        DecodedJWT jwt;
+        Map<String, String> claims = new HashMap<>();
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secretWord);
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .build();
+            jwt = verifier.verify(token);
+        } catch (JWTVerificationException exception){
+            throw new UnAuthorizedException(ErrorMessages.INVALID_TOKEN, exception);
+        }
+
+        jwt.getClaims().forEach((k, v) -> claims.put(k, v.asString()));
+
+        return claims;
     }
 }
