@@ -17,7 +17,7 @@ server:
 
 eureka:
   client:
-    register-with-eureka: false
+    register-with-eureka: true
     fetch-registry: false
     service-url:
       defaultZone: http://apimanager:8000/eureka
