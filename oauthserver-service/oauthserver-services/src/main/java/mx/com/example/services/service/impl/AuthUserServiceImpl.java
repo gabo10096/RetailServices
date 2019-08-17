@@ -9,7 +9,8 @@ public class AuthUserServiceImpl implements IAuthUserService {
 
     @Override
     public void validateCredentials(String user, String password) {
-        throw new UnAuthorizedException("Login invalido");
+
+      //  throw new UnAuthorizedException("Login invalido");
     }
 
     @Override
